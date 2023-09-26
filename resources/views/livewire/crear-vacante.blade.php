@@ -24,11 +24,14 @@
     {{-- Categoria --}}
     <div>
         <x-input-label for="categoria" :value="__('Categoría')" />
-        <select name="categoria" id="categoria"
-            class=" w-full order-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
-            <option value="">--Selecciona una categoría--</option>
-        </select>
+        <select name="categoria" id="categoria" class=" w-full order-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
 
+        <option value="">--Seleccione--</option>
+        @foreach ($categorias as $categoria)
+         <option value="{{$categoria->id}}">{{$categoria->categoria}}</option>
+            
+        @endforeach
+        </select>
     </div>
     {{-- Empresa --}}
     <div>
