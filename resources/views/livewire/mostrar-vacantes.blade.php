@@ -1,3 +1,4 @@
+<div>
 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
     @forelse ($vacantes as $vacante)
         
@@ -13,7 +14,7 @@
       </div>
       <div class="flex gap-3 items-stretch  flex-col md:flex-row mt-5 md:mt-0">
         <a href="#" class="bg-slate-800 py-2 px-4 rounded-lg text-white text-sm font-bold uppercase text-center">Candidatos</a>
-        <a href="#" class="bg-blue-800 py-2 px-4 rounded-lg text-white text-sm font-bold uppercase text-center">Editar</a>
+        <a href="{{route('vacantes.edit',$vacante->id)}}" class="bg-blue-800 py-2 px-4 rounded-lg text-white text-sm font-bold uppercase text-center">Editar</a>
         <a href="#" class="bg-red-600 py-2 px-4 rounded-lg text-white text-sm font-bold uppercase text-center">Eliminar</a>
       </div>
       
@@ -21,4 +22,7 @@
     @empty
     <div class="text-lg text-gray-600 font-bold text-center p-10">No hay vacantes para mostrar</div>
     @endforelse
+   
+</div>
+<div class=" my-10">{{$vacantes->links()}}</div>
 </div>
