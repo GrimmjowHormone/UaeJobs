@@ -58,20 +58,20 @@
     {{-- Imagen --}}
     <div>
         <x-input-label for="imagen" :value="__('Imagen')" />
-        <x-text-input id="imagen" class="block mt-1 w-full" type="file" wire:model="imagen" accept="image/*"/>
-        <x-input-error :messages="$errors->get('imagen')" class="mt-2" />
+        <x-text-input id="imagen" class="block mt-1 w-full" type="file" wire:model="new_imagen" accept="image/*"/>
+        <x-input-error :messages="$errors->get('new_imagen')" class="mt-2" />
 
             <div class="my-5 w-96">
                 <x-input-label  :value="__('Imagen Actual')" />
                 <img src="{{asset('storage/vacantes/'. $imagen)}}" alt="{{'Imagen Vacante ' . $titulo}}">
             </div>
-            {{-- <div class="my-5 w-96">
-                @if ($imagen)
-                    Imagen: 
-                    <img src="{{$imagen->temporaryUrl()}}" alt="Imagen de la vacante">
+            <div class="my-5 w-96">
+                @if ($new_imagen)
+                    Imagen Nueva: 
+                    <img src="{{$new_imagen->temporaryUrl()}}" alt="Imagen de la vacante">
                     
                 @endif
-            </div> --}}
+            </div>
     </div>
     <x-primary-button class="w-full justify-center">
         {{ __('Guardar Cambios') }}
