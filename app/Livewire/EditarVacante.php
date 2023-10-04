@@ -8,9 +8,10 @@ use App\Models\Vacante;
 use Illuminate\Support\Carbon;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
 
 class EditarVacante extends Component
-{   
+{
     public $vacante_id;
     public $titulo;
     public $salario;
@@ -29,7 +30,7 @@ class EditarVacante extends Component
         'ultimo_dia' => 'required',
         'descripcion' => 'required',
         'new_imagen' => 'nullable|image|max:1024'
-        
+
 
 
     ];
@@ -48,14 +49,18 @@ class EditarVacante extends Component
     {
         $datos = $this->validate();
 
-        //Revisar si hay una nueva imagen
-        if($this->new_imagen){
-            $imagen=$this->new_imagen->store('public/vacantes');
-            $datos['imagen']=str_replace('public/vacantes/', '',$imagen);
-        }
 
         //Encontrar vacante a editar
         $vacante=Vacante::find($this->vacante_id);
+
+         //Revisar si hay una nueva imagen
+         if($this->new_imagen){
+            $imagen=$this->new_imagen->store('public/vacantes');
+            $datos['imagen']=str_replace('public/vacantes/', '',$imagen);
+            Storage::delete('public/vacantes/'.$vacante->imagen);
+
+        }
+
         //Asignar los valores
         $vacante->titulo=$datos['titulo'];
         $vacante->salario_id=$datos['salario'];
