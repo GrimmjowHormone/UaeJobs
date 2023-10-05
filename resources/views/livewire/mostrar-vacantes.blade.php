@@ -15,8 +15,10 @@
                         class="bg-slate-800 py-2 px-4 rounded-lg text-white text-sm font-bold uppercase text-center">Candidatos</a>
                     <a href="{{ route('vacantes.edit', $vacante->id) }}"
                         class="bg-blue-800 py-2 px-4 rounded-lg text-white text-sm font-bold uppercase text-center">Editar</a>
-                    <a href="#"
-                        class="bg-red-600 py-2 px-4 rounded-lg text-white text-sm font-bold uppercase text-center">Eliminar</a>
+
+
+                        <button wire:click="$emit('showAlert',{{ $vacante->id}})"
+                        class="bg-red-600 py-2 px-4 rounded-lg text-white text-sm font-bold uppercase text-center" id="eliminar">Eliminar</button>
                 </div>
 
             </div>
@@ -29,9 +31,11 @@
 </div>
 
 @push('scripts')
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        Swal.fire({
+        Livewire.on('showAlert',vacanteId=>{
+            Swal.fire({
             title: 'Eliminar Vacante?',
             text: "Una vacante eliminada no se puede recuperar!",
             icon: 'warning',
@@ -39,9 +43,13 @@
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Si, Eliminar!',
-            cancelButtonText:'Cancelar'
+            cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
+
+                //Eliminar la vacante desde el servidor
+                Livewire.emit('eliminarVacante',vacanteId)
+
                 Swal.fire(
                     'Eliminada!',
                     'La vacante ha sido eliminada',
@@ -49,5 +57,7 @@
                 )
             }
         })
+        })
+
     </script>
 @endpush

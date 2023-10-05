@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Http\Livewire;
 
 use App\Models\Categoria;
 use App\Models\Salario;
@@ -28,7 +28,7 @@ class CrearVacante extends Component
         'descripcion' => 'required',
         'imagen' => 'required|image|max:1024',
 
-        
+
     ];
 
     //
