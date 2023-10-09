@@ -3,7 +3,7 @@
         @forelse ($vacantes as $vacante)
             <div class="p-6 text-gray-900 md:flex md:justify-between md:items-center">
                 <div class="space-y-3">
-                    <a href="#" class="text-xl font-bold">
+                    <a href="{{route('vacantes.show',$vacante->id)}}" class="text-xl font-bold">
                         {{ $vacante->titulo }}
                     </a>
 
@@ -46,15 +46,15 @@
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
-
-                //Eliminar la vacante desde el servidor
-                Livewire.emit('eliminarVacante',vacanteId)
-
                 Swal.fire(
                     'Eliminada!',
                     'La vacante ha sido eliminada',
                     'success'
                 )
+                //Eliminar la vacante desde el servidor
+                Livewire.emit('eliminarVacante',vacanteId)
+
+
             }
         })
         })

@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 use Livewire\Attributes\On;
 use App\Models\Vacante;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 
 
@@ -10,11 +11,18 @@ class MostrarVacantes extends Component
 {
     protected $listeners = ['eliminarVacante'];
 
-    public function eliminarVacante(Vacante $vacante)
-    {
-        $vacante->delete();
-        return redirect(request()->header('Referer'));
+
+public function eliminarVacante( Vacante $vacante )
+{
+
+    if( $vacante->imagen ) {
+        Storage::delete('public/vacantes/' . $vacante->imagen);
     }
+
+    $vacante->delete();
+    return redirect(request()->header('Referer'));
+
+}
     public function render()
     {
             //Se consulta por medio del id del usuario en la base de datos y paginamos la consulta
