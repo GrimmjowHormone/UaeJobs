@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Vacante;
+use App\Notifications\NuevoCandidato;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -15,8 +16,9 @@ class PostularVacante extends Component
         'cv' => 'required|mimes:pdf'
     ];
 
-    public function mount(Vacante $vacante){
-       $this->vacante=$vacante;
+    public function mount(Vacante $vacante)
+    {
+        $this->vacante = $vacante;
     }
 
     public function postularme()
@@ -30,13 +32,14 @@ class PostularVacante extends Component
 
         //Crear candidato a la vacante
         $this->vacante->candidatos()->create([
-            'user_id'=>auth()->user()->id,
-            'cv'=>$datos['cv']
+            'user_id' => auth()->user()->id,
+            'cv' => $datos['cv']
         ]);
         //Crear notificacion y enviar email
-
+        $this->vacante->reclutador->notify(new NuevoCandidato($this->vacante->id, $this->vacante->titulo, auth()->user()->id,));
         //Mostrar al usuario un mensaje de ok
-        session()->flash('mensaje','Se envio correctamente tu información, mucha suerte');
+        session()->flash('mensaje', 'Se envio correctamente tu información, mucha suerte');
+        return redirect()->back();
     }
     public function render()
     {
