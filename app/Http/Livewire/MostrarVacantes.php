@@ -18,6 +18,13 @@ public function eliminarVacante( Vacante $vacante )
     if( $vacante->imagen ) {
         Storage::delete('public/vacantes/' . $vacante->imagen);
     }
+    if( $vacante->candidatos->count() ) {
+        foreach( $vacante->candidatos as $candidato ) {
+            if( $candidato->cv ) {
+                Storage::delete('public/cv/' . $candidato->cv);
+            }
+        }
+    }
 
     $vacante->delete();
     return redirect(request()->header('Referer'));

@@ -48,11 +48,13 @@ class NuevoCandidato extends Notification
     {
         $url=url('/notificaciones');
         return (new MailMessage)
+            ->greeting('¡Hola!')
             ->line('Has recibido un nuevo candiato en tu vacante.')
-            ->line('La vacante es:' . $this->nombre_vacante)
+            ->line('La vacante es: ' . $this->nombre_vacante)
 
             ->action('Ver Notificaciones', $url)
-            ->line('Gracias por utilizar UAEJobs!');
+            ->line('Gracias por utilizar UAEJobs!')
+            ->salutation('Saludos, Uaejobs');
     }
 
     //Almacena las notificaciones en la base de datos
