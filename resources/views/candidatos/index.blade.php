@@ -19,7 +19,7 @@
                                         <div class="flex-1">
                                            <p class="text-xl font-medium text-gray-800"> {{$candidato->user->name}}</p>
                                            <p class="text-sm font-medium text-gray-600"> {{$candidato->user->email}}</p>
-                                           <p class="text-sm font-medium text-gray-600"> Día que se postulo: <span class="font-normal">{{$candidato->user->created_at->diffForHumans()}}</span></p>
+                                           <p class="text-sm font-medium text-gray-600"> Día que se postulo: <span class="font-normal">{{$candidato->created_at->diffForHumans()}}</span></p>
 
                                         </div>
                                         <div>
