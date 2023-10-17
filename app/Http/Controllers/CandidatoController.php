@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Candidato;
+
 use Illuminate\Http\Request;
 
 class CandidatoController extends Controller
@@ -10,9 +11,10 @@ class CandidatoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index( )
     {
         //
+
     }
 
     /**

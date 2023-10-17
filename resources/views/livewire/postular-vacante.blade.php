@@ -14,6 +14,13 @@
             {{ __('Postularme') }}
         </x-primary-button>
     </form>
+    @if (session()->has('error'))
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+            <p class="font-bold">Lo siento!</p>
+            <span class="block sm:inline">{{ session('error') }}</span>
+        </div>
+
+    @endif
 
     @endif
 

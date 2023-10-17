@@ -21,25 +21,34 @@ class PostularVacante extends Component
         $this->vacante = $vacante;
     }
 
+
+
     public function postularme()
     {
-        //el validate funciona sin mandar ningun parametro, por las convenciones de laravel, manda a llamar a la variable rules que definimos arriba de esta funcion
         $datos = $this->validate();
+        // validar que el usuario no haya postulado a la vacante
+        if($this->vacante->candidatos()->where('user_id', auth()->user()->id)->count() > 0) {
+            session()->flash('error', 'Ya postulaste a esta vacante anteriormente');
+        } else {
+            // Postularse y almacenar el CV
+            $cv = $this->cv->store('public/cv');
+            $datos['cv'] = str_replace('public/cv/', '', $cv);
 
-        //Almacenar el CV
-        $cv = $this->cv->store('public/cv');
-        $datos['cv'] = str_replace('public/cv/', '', $cv);
+            // Crear el candidato a la vacante
+            $this->vacante->candidatos()->create([
+                'user_id' => auth()->user()->id,
+                'cv' => $datos['cv']
+            ]);
 
-        //Crear candidato a la vacante
-        $this->vacante->candidatos()->create([
-            'user_id' => auth()->user()->id,
-            'cv' => $datos['cv']
-        ]);
-        //Crear notificacion y enviar email
-        $this->vacante->reclutador->notify(new NuevoCandidato($this->vacante->id, $this->vacante->titulo, auth()->user()->id,));
-        //Mostrar al usuario un mensaje de ok
-        session()->flash('mensaje', 'Se envio correctamente tu información, mucha suerte');
-        return redirect()->back();
+            // Crear notificación y enviar el email
+            $this->vacante->reclutador->notify(new NuevoCandidato($this->vacante->id, $this->vacante->titulo, auth()->user()->id ));
+
+            // Mostrar el usuario un mensaje de ok
+            session()->flash('mensaje', 'Se envió correctamente tu información, mucha suerte');
+
+            return redirect()->back();
+        }
+
     }
     public function render()
     {
