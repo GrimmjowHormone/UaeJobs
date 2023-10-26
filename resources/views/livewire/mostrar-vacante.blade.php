@@ -22,6 +22,13 @@
 
             <p class="font-bold text-sm uppercase text-gray-800 my-3">Salario: <span
                     class="normal-case font-normal">{{ $vacante->salario->salario }}</span></p>
+
+            <p class="font-bold text-sm uppercase text-gray-800 my-3">Edad: <span
+                    class="normal-case font-normal">{{ $vacante->edad_minima }} a {{ $vacante->edad_maxima }} </span></p>
+
+                    {{-- Pais --}}
+                    <p class="font-bold text-sm uppercase text-gray-800 my-3">Pais: <span
+                        class="normal-case font-normal">{{ $vacante->country->country }}</span></p>
         </div>
 
     </div>
@@ -49,7 +56,7 @@
 
     @cannot('create', App\Models\Vacante::class)
 
-     <livewire:postular-vacante :vacante="$vacante" />
+        <livewire:postular-vacante :vacante="$vacante" />
     @endcan
 
 </div>

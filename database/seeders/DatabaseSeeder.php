@@ -21,5 +21,6 @@ class DatabaseSeeder extends Seeder
 
         $this->call(SalarioSeeder::class);
         $this->call(CategoriasSeeder::class);
+        $this->call(CountriesSeeder::class);
     }
 }

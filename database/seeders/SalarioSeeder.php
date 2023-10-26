@@ -16,55 +16,55 @@ class SalarioSeeder extends Seeder
     public function run()
     {
         DB::table('salarios')->insert([
-            'salario' => '$0 - $499',
+            'salario' => 'MX$0 - MX$3000',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
         DB::table('salarios')->insert([
-            'salario' => '$500 - $749',
+            'salario' => 'MX$3000 - MX$5000',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
         DB::table('salarios')->insert([
-            'salario' => '$750 - $999',
+            'salario' => 'MX$5000 - MX$7000',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
         DB::table('salarios')->insert([
-            'salario' => '$1000 - $1499',
+            'salario' => 'MX$7000 - MX$12,000',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
         DB::table('salarios')->insert([
-            'salario' => '$1500 - $1999',
+            'salario' => 'MX$12,000 - MX$15,000',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
         DB::table('salarios')->insert([
-            'salario' => '$2000 - $2499',
+            'salario' => 'MX$15,000 - MX$17,000',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
         DB::table('salarios')->insert([
-            'salario' => '$2500 - $2999',
+            'salario' => 'MX$17,000 - MX$19,000',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
         DB::table('salarios')->insert([
-            'salario' => '$3000 - $4999',
+            'salario' => 'MX$19,000 - MX$25,000',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
         DB::table('salarios')->insert([
-            'salario' => '+$5000',
+            'salario' => '+MX$25,000',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);

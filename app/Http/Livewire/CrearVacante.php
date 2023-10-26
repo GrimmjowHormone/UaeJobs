@@ -20,6 +20,9 @@ class CrearVacante extends Component
     public $ultimo_dia;
     public $descripcion;
     public $imagen;
+    public $edad_minima; // Agrega esta línea
+    public $edad_maxima;
+    public $country;
     use WithFileUploads;
     protected $rules = [
         'titulo' => 'required|string',
@@ -29,6 +32,9 @@ class CrearVacante extends Component
         'ultimo_dia' => 'required',
         'descripcion' => 'required',
         'imagen' => 'required|image|max:1024',
+        'edad_minima' => 'integer|min:18',
+        'edad_maxima' => 'integer|min:18|max:70',
+        'country' => 'nullable'
 
 
     ];
@@ -56,6 +62,9 @@ class CrearVacante extends Component
             'descripcion' => $datos['descripcion'],
             'imagen' => $datos['imagen'],
             'user_id' => auth()->user()->id,
+            'country_id' => null,
+            'edad_minima' => $datos['edad_minima'],
+            'edad_maxima' => $datos['edad_maxima']
 
         ]);
         //Crear un mensaje

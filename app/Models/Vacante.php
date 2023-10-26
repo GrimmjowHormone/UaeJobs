@@ -36,4 +36,9 @@ class Vacante extends Model
     public function reclutador(){
         return $this->belongsTo(User::class, 'user_id');
     }
+    public function country()
+{
+    return $this->belongsTo(Country::class, 'country_id');
+}
+
 }

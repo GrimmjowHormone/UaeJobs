@@ -19,6 +19,11 @@ return new class extends Migration
             $table->string('empresa');
             $table->date('ultimo_dia');
             $table->text('descripcion');
+            $table->integer('edad_minima')->nullable(); // Edad mínima (puede ser nula si no es requerida)
+            $table->integer('edad_maxima')->nullable();
+
+
+
             $table->string('imagen');
             $table->integer('publicado')->default(1);
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
@@ -31,12 +36,14 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('vacantes', function (Blueprint $table) {
+
             $table->dropForeign('vacantes_categoria_id_foreign');
             $table->dropForeign('vacantes_salario_id_foreign');
             $table->dropForeign('vacantes_user_id_foreign');
 
+
             $table->dropColumn(['titulo','salario_id','categoria_id','empresa','ultimo_dia','descripcion','imagen','publicado','user_id']);
-            
+
         });
     }
 };
