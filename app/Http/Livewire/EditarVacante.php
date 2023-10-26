@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Categoria;
+use App\Models\Country;
 use App\Models\Salario;
 use App\Models\Vacante;
 use Illuminate\Support\Carbon;
@@ -21,6 +22,9 @@ class EditarVacante extends Component
     public $descripcion;
     public $imagen;
     public $new_imagen;
+    public $edad_minima; // Agrega esta línea
+    public $edad_maxima;
+    public $country;
     use WithFileUploads;
     protected $rules = [
         'titulo' => 'required|string',
@@ -29,7 +33,10 @@ class EditarVacante extends Component
         'empresa' => 'required',
         'ultimo_dia' => 'required',
         'descripcion' => 'required',
-        'new_imagen' => 'nullable|image|max:1024'
+        'edad_minima' => 'integer|min:18',
+        'edad_maxima' => 'integer|min:18|max:70',
+        'new_imagen' => 'nullable|image|max:1024',
+        'country' => 'required'
 
 
 
@@ -43,6 +50,9 @@ class EditarVacante extends Component
         $this->empresa = $vacante->empresa;
         $this->ultimo_dia = Carbon::parse($vacante->ultimo_dia)->format('Y-m-d');
         $this->descripcion = $vacante->descripcion;
+        $this->edad_minima=$vacante->edad_minima;
+        $this->edad_maxima=$vacante->edad_maxima;
+        $this->country=$vacante->country_id;
         $this->imagen = $vacante->imagen;
     }
     public function editarVacante()
@@ -68,8 +78,10 @@ class EditarVacante extends Component
         $vacante->empresa=$datos['empresa'];
         $vacante->ultimo_dia=$datos['ultimo_dia'];
         $vacante->descripcion=$datos['descripcion'];
+        $vacante->edad_maxima=$datos['edad_maxima'];
+        $vacante->edad_minima=$datos['edad_minima'];
         $vacante->imagen=$datos['imagen'] ?? $vacante->imagen;
-
+        $vacante->country_id=$datos['country'];
 
 
         //Guardar la vacante
@@ -82,9 +94,11 @@ class EditarVacante extends Component
     {
         $salarios = Salario::all();
         $categorias = Categoria::all();
+        $countries = Country::all();
         return view('livewire.editar-vacante', [
             'salarios' => $salarios,
-            'categorias' => $categorias
+            'categorias' => $categorias,
+            'countries'=>$countries
         ]);
     }
 }

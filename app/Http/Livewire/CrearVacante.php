@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 
 use App\Models\Categoria;
+use App\Models\Country;
 use App\Models\Salario;
 use App\Models\Vacante;
 use Livewire\Component;
@@ -20,7 +21,7 @@ class CrearVacante extends Component
     public $ultimo_dia;
     public $descripcion;
     public $imagen;
-    public $edad_minima; // Agrega esta línea
+    public $edad_minima;
     public $edad_maxima;
     public $country;
     use WithFileUploads;
@@ -34,7 +35,7 @@ class CrearVacante extends Component
         'imagen' => 'required|image|max:1024',
         'edad_minima' => 'integer|min:18',
         'edad_maxima' => 'integer|min:18|max:70',
-        'country' => 'nullable'
+        'country' => 'required'
 
 
     ];
@@ -80,9 +81,11 @@ class CrearVacante extends Component
         //Consultar BD para pasar informacion a la vista
         $salarios = Salario::all();
         $categorias = Categoria::all();
+        $countries = Country::all();
         return view('livewire.crear-vacante', [
             'salarios' => $salarios,
-            'categorias' => $categorias
+            'categorias' => $categorias,
+            'countries'=>$countries
         ]);
     }
 }

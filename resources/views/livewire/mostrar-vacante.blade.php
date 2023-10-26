@@ -42,6 +42,15 @@
             <p>{!! nl2br(e($vacante->descripcion)) !!}</p>
         </div>
     </div>
+
+    @auth
+
+
+    @cannot('create', App\Models\Vacante::class)
+
+        <livewire:postular-vacante :vacante="$vacante" />
+    @endcan
+    @endauth
     @guest
 
 
@@ -54,9 +63,5 @@
     @endguest
 
 
-    @cannot('create', App\Models\Vacante::class)
-
-        <livewire:postular-vacante :vacante="$vacante" />
-    @endcan
 
 </div>

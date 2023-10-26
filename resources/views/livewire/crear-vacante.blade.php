@@ -57,31 +57,47 @@
     </div>
 
     {{-- Edad minima y maxima --}}
-    <div>
-        <x-input-label for="edad_minima" :value="__('Edad Mínima')" />
-        <x-text-input id="edad_minima" class="block mt-1 w-full" type="number" wire:model="edad_minima" :value="old('edad_minima')" placeholder="Edad Mínima" />
-        <x-input-error :messages="$errors->get('edad_minima')" class="mt-2" />
-    </div>
+    <div class="block justify-between md:flex ">
+        <div class=" ">
+            <x-input-label for="edad_minima" :value="__('Edad Mínima')" />
+            <x-text-input id="edad_minima" class="flex-auto mt-1  " type="number" wire:model="edad_minima"
+                :value="old('edad_minima')" placeholder="Edad Mínima" />
+            <x-input-error :messages="$errors->get('edad_minima')" class="mt-2" />
+        </div>
 
+        <div class="">
+            <x-input-label for="edad_maxima" :value="__('Edad Máxima')" />
+            <x-text-input id="edad_maxima" class="flex-auto  mt-1 " type="number" wire:model="edad_maxima"
+                :value="old('edad_maxima')" placeholder="Edad Máxima" />
+            <x-input-error :messages="$errors->get('edad_maxima')" class="mt-2" />
+        </div>
+    </div>
+    {{-- Pais --}}
     <div>
-        <x-input-label for="edad_maxima" :value="__('Edad Máxima')" />
-        <x-text-input id="edad_maxima" class="block mt-1 w-full" type="number" wire:model="edad_maxima" :value="old('edad_maxima')" placeholder="Edad Máxima" />
-        <x-input-error :messages="$errors->get('edad_maxima')" class="mt-2" />
+        <x-input-label for="country" :value="__('Pais')" />
+        <select wire:model="country" id="country"
+            class=" w-full order-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+
+            <option value="">--Seleccione--</option>
+            @foreach ($countries as $country)
+                <option value="{{ $country->id }}">{{ $country->country }}</option>
+            @endforeach
+        </select>
+        <x-input-error :messages="$errors->get('country')" class="mt-2" />
     </div>
 
     {{-- Imagen --}}
     <div>
         <x-input-label for="imagen" :value="__('Imagen')" />
-        <x-text-input id="imagen" class="block mt-1 w-full" type="file" wire:model="imagen" accept="image/*"/>
+        <x-text-input id="imagen" class="block mt-1 w-full" type="file" wire:model="imagen" accept="image/*" />
         <x-input-error :messages="$errors->get('imagen')" class="mt-2" />
 
-            <div class="my-5 w-96">
-                @if ($imagen)
-                    Imagen:
-                    <img src="{{$imagen->temporaryUrl()}}" alt="Imagen de la vacante">
-
-                @endif
-            </div>
+        <div class="my-5 w-96">
+            @if ($imagen)
+                Imagen:
+                <img src="{{ $imagen->temporaryUrl() }}" alt="Imagen de la vacante">
+            @endif
+        </div>
     </div>
     <x-primary-button class="w-full justify-center">
         {{ __('Crear Vacante') }}
