@@ -33,8 +33,8 @@ class CrearVacante extends Component
         'ultimo_dia' => 'required',
         'descripcion' => 'required',
         'imagen' => 'required|image|max:1024',
-        'edad_minima' => 'integer|min:18',
-        'edad_maxima' => 'integer|min:18|max:70',
+        'edad_minima' => 'required|integer|min:18',
+        'edad_maxima' => 'required|integer|min:18|max:70',
         'country' => 'required'
 
 
@@ -63,7 +63,7 @@ class CrearVacante extends Component
             'descripcion' => $datos['descripcion'],
             'imagen' => $datos['imagen'],
             'user_id' => auth()->user()->id,
-            'country_id' => null,
+            'country_id' => $datos['country'],
             'edad_minima' => $datos['edad_minima'],
             'edad_maxima' => $datos['edad_maxima']
 

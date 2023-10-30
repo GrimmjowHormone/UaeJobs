@@ -7,12 +7,14 @@ use Livewire\Component;
 
 class HomeVacantes extends Component
 {
+    // public $country;
     public $termino;
     public $categoria;
     public $salario;
     protected $listeners=['terminosBusqueda'=>'buscar'];
-    public function buscar($termino, $categoria, $salario)
+    public function buscar($termino,$categoria,$salario)
     {
+
         $this->termino=$termino;
         $this->categoria=$categoria;
         $this->salario=$salario;
@@ -22,13 +24,37 @@ class HomeVacantes extends Component
     public function render()
     {
 
-        // $vacantes=Vacante::all();
+        // // $vacantes=Vacante::all();
+        // $vacantes = Vacante::when( $this->termino || $this->categoria || $this->salario, function ($query) {
+        //     $query->where(function ($query) {
+        //         if ($this->termino) {
+        //             $query->where(function ($query) {
+        //                 $query->where('titulo', 'LIKE', "%" . $this->termino . "%")
+        //                       ->orWhere('empresa', 'LIKE', "%" . $this->termino . "%")
+        //                       ->orWhere('country_id','LIKE', "%" . $this->termino . "%") ;
+        //             });
+        //         }
+
+        //         if ($this->categoria) {
+        //             $query->where('categoria_id', $this->categoria);
+        //         }
+
+        //         if ($this->salario) {
+        //             $query->where('salario_id', $this->salario);
+        //         }
+        //     });
+        // })
+        // ->paginate(20);
+
         $vacantes = Vacante::when($this->termino || $this->categoria || $this->salario, function ($query) {
             $query->where(function ($query) {
                 if ($this->termino) {
                     $query->where(function ($query) {
                         $query->where('titulo', 'LIKE', "%" . $this->termino . "%")
-                              ->orWhere('empresa', 'LIKE', "%" . $this->termino . "%");
+                            ->orWhere('empresa', 'LIKE', "%" . $this->termino . "%")
+                            ->orWhereHas('country', function ($query) {
+                                $query->where('country', 'LIKE', "%" . $this->termino . "%");
+                            });
                     });
                 }
 
@@ -42,6 +68,7 @@ class HomeVacantes extends Component
             });
         })
         ->paginate(20);
+
 
 
 

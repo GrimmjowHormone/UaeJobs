@@ -60,14 +60,14 @@
     <div class="block justify-between md:flex ">
         <div class=" ">
             <x-input-label for="edad_minima" :value="__('Edad Mínima')" />
-            <x-text-input id="edad_minima" class="flex-auto mt-1  " type="number" wire:model="edad_minima"
+            <x-text-input id="edad_minima" class="w-full md:flex-auto  mt-1" type="number" wire:model="edad_minima"
                 :value="old('edad_minima')" placeholder="Edad Mínima" />
             <x-input-error :messages="$errors->get('edad_minima')" class="mt-2" />
         </div>
 
         <div class="">
             <x-input-label for="edad_maxima" :value="__('Edad Máxima')" />
-            <x-text-input id="edad_maxima" class="flex-auto  mt-1 " type="number" wire:model="edad_maxima"
+            <x-text-input id="edad_maxima" class="w-full md:flex-auto  mt-1" type="number" wire:model="edad_maxima"
                 :value="old('edad_maxima')" placeholder="Edad Máxima" />
             <x-input-error :messages="$errors->get('edad_maxima')" class="mt-2" />
         </div>

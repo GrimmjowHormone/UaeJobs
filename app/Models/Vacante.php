@@ -20,7 +20,8 @@ class Vacante extends Model
         'ultimo_dia',
         'descripcion',
         'imagen',
-        'user_id'
+        'user_id',
+        'country_id'
     ];
     public function categoria(){
         return $this->belongsTo(Categoria::class);
@@ -38,7 +39,7 @@ class Vacante extends Model
     }
     public function country()
 {
-    return $this->belongsTo(Country::class, 'country_id');
+    return $this->belongsTo(Country::class);
 }
 
 }

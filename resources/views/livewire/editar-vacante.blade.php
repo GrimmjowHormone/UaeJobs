@@ -56,19 +56,23 @@
         <x-input-error :messages="$errors->get('descripcion')" class="mt-2" />
     </div>
 
-     {{-- Edad minima y maxima --}}
-     <div>
-        <x-input-label for="edad_minima" :value="__('Edad Mínima')" />
-        <x-text-input id="edad_minima" class="block mt-1 w-full" type="number" wire:model="edad_minima"
-            :value="old('edad_minima')" placeholder="Edad Mínima" />
-        <x-input-error :messages="$errors->get('edad_minima')" class="mt-2" />
-    </div>
+    {{-- Edad minima y maxima --}}
+    <div class="block justify-between md:flex ">
 
-    <div>
-        <x-input-label for="edad_maxima" :value="__('Edad Máxima')" />
-        <x-text-input id="edad_maxima" class="block mt-1 w-full" type="number" wire:model="edad_maxima"
-            :value="old('edad_maxima')" placeholder="Edad Máxima" />
-        <x-input-error :messages="$errors->get('edad_maxima')" class="mt-2" />
+            <div>
+                <x-input-label for="edad_minima" :value="__('Edad Mínima')" />
+                <x-text-input id="edad_minima" class="w-full md:flex-auto  mt-1" type="number" wire:model="edad_minima"
+                    :value="old('edad_minima')" placeholder="Edad Mínima" />
+                <x-input-error :messages="$errors->get('edad_minima')" class="mt-2" />
+            </div>
+
+            <div>
+                <x-input-label for="edad_maxima" :value="__('Edad Máxima')" />
+                <x-text-input id="edad_maxima" class="w-full md:flex-auto  mt-1" type="number" wire:model="edad_maxima"
+                    :value="old('edad_maxima')" placeholder="Edad Máxima" />
+                <x-input-error :messages="$errors->get('edad_maxima')" class="mt-2" />
+            </div>
+
     </div>
     {{-- Pais --}}
     <div>
@@ -87,20 +91,20 @@
     {{-- Imagen --}}
     <div>
         <x-input-label for="imagen" :value="__('Imagen')" />
-        <x-text-input id="imagen" class="block mt-1 w-full" type="file" wire:model="new_imagen" accept="image/*"/>
+        <x-text-input id="imagen" class="block mt-1 w-full" type="file" wire:model="new_imagen"
+            accept="image/*" />
         <x-input-error :messages="$errors->get('new_imagen')" class="mt-2" />
 
-            <div class="my-5 w-96">
-                <x-input-label  :value="__('Imagen Actual')" />
-                <img src="{{asset('storage/vacantes/'. $imagen)}}" alt="{{'Imagen Vacante ' . $titulo}}">
-            </div>
-            <div class="my-5 w-96">
-                @if ($new_imagen)
-                    Imagen Nueva:
-                    <img src="{{$new_imagen->temporaryUrl()}}" alt="Imagen de la vacante">
-
-                @endif
-            </div>
+        <div class="my-5 w-96">
+            <x-input-label :value="__('Imagen Actual')" />
+            <img src="{{ asset('storage/vacantes/' . $imagen) }}" alt="{{ 'Imagen Vacante ' . $titulo }}">
+        </div>
+        <div class="my-5 w-96">
+            @if ($new_imagen)
+                Imagen Nueva:
+                <img src="{{ $new_imagen->temporaryUrl() }}" alt="Imagen de la vacante">
+            @endif
+        </div>
     </div>
     <x-primary-button class="w-full justify-center">
         {{ __('Guardar Cambios') }}
