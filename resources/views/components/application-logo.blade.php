@@ -1,3 +1,3 @@
 <h1 class="text-4xl">
-    UAE<span class="font-extrabold">Jobs</span>
+  <img class="w-4/12" src="{{ asset('storage/imagenes/logo.png') }}" alt="">
 </h1>

@@ -18,7 +18,7 @@
                             </p>
                         </div>
                         <div class="mt-5 md:mt-0">
-                            <a  class="bg-sky-600 p-3 text-sm uppercase font-bold text-white rounded-lg block text-center" href="{{route('vacantes.show',$vacante->id)}}">Ver Vacante</a>
+                            <a  class="bg-sky-600  hover:bg-sky-900 p-3 text-sm uppercase font-bold text-white rounded-lg block text-center" href="{{route('vacantes.show',$vacante->id)}}">Ver Vacante</a>
                         </div>
                     </div>
 

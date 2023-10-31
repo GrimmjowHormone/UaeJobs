@@ -1,7 +1,7 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
+        <div class="flex justify-between h-20">
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
@@ -10,17 +10,16 @@
                     </a>
                 </div>
                 @auth
-                @can('create', App\Models\Vacante::class)
-
-                    <!-- Navigation Links -->
-                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-nav-link :href="route('vacantes.index')" :active="request()->routeIs('vacantes.index')">
-                            {{ __('Mis Vacantes') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('vacantes.create')" :active="request()->routeIs('vacantes.create')">
-                            {{ __('Crear Vacante') }}
-                        </x-nav-link>
-                    </div>
+                    @can('create', App\Models\Vacante::class)
+                        <!-- Navigation Links -->
+                        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                            <x-nav-link :href="route('vacantes.index')" :active="request()->routeIs('vacantes.index')">
+                                {{ __('Mis Vacantes') }}
+                            </x-nav-link>
+                            <x-nav-link :href="route('vacantes.create')" :active="request()->routeIs('vacantes.create')">
+                                {{ __('Crear Vacante') }}
+                            </x-nav-link>
+                        </div>
                     @endcan
                 @endauth
 
@@ -31,9 +30,17 @@
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 @auth
                     @can('create', App\Models\Vacante::class)
-                        <a class="mr-2 w-7 h-7 bg-indigo-600 hover:bg-indigo-800 rounded-full flex flex-col items-center justify-center text-sm font-extrabold text-white"
-                            href="{{ route('notificaciones') }}">
-                            {{ Auth::user()->unreadNotifications->count() }}</a>
+                        <a href="{{ route('notificaciones') }}">
+
+                            <svg class="mr-2 w-7 h-7 rounded-full flex flex-col items-center justify-center text-sm font-extrabold text-white"
+                                xmlns="http://www.w3.org/2000/svg" width="130" height="130" viewBox="0 0 24 24">
+
+                                <path fill="#0284c7 "
+                                    d="M4 19v-2h2v-7q0-2.075 1.25-3.688T10.5 4.2v-.7q0-.625.438-1.063T12 2q.625 0 1.063.438T13.5 3.5v.7q2 .5 3.25 2.113T18 10v7h2v2H4Zm8 3q-.825 0-1.413-.588T10 20h4q0 .825-.588 1.413T12 22Z" />
+                                    <text x="50%" y="50%" fill="white" font-size="14" text-anchor="middle" dy=".3em">{{ Auth::user()->unreadNotifications->count() }}</text>
+                            </svg>
+
+                        </a>
                     @endcan
 
                     <x-dropdown align="right" width="48">
@@ -46,7 +53,7 @@
                                     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 20 20">
                                         <path fill-rule="evenodd" d=" M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414
-                                                    1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                            1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
                                             clip-rule="evenodd" />
                                     </svg>
                                 </div>

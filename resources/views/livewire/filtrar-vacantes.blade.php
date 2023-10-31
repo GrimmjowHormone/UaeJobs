@@ -11,7 +11,7 @@
                         Búsqueda
                     </label>
                     <input id="termino" type="text" placeholder="Buscar por Término: ej. Desarrolador"
-                        class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 w-full"
+                        class="rounded-md shadow-sm border-gray-300 focus:border-sky-400 focus:ring focus:ring-sky-400 focus:ring-opacity-50 w-full"
                         wire:model="termino"
 
                         />
@@ -41,7 +41,7 @@
 
             <div class="flex justify-end">
                 <input type="submit"
-                    class="bg-indigo-500 hover:bg-indigo-600 transition-colors text-white text-sm font-bold px-10 py-2 rounded cursor-pointer uppercase w-full md:w-auto"
+                    class="bg-sky-600 hover:bg-sky-900 transition-colors text-white text-sm font-bold px-10 py-2 rounded cursor-pointer uppercase w-full md:w-auto"
                     value="Buscar" />
             </div>
         </form>
