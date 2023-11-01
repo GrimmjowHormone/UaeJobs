@@ -19,9 +19,9 @@ return new class extends Migration
             $table->string('empresa');
             $table->date('ultimo_dia');
             $table->text('descripcion');
-            $table->integer('edad_minima')->nullable(); // Edad mínima (puede ser nula si no es requerida)
-            $table->integer('edad_maxima')->nullable();
-
+            $table->integer('edad_minima'); // Edad mínima (puede ser nula si no es requerida)
+            $table->integer('edad_maxima');
+            $table->string('municipio');
 
 
             $table->string('imagen');
@@ -42,7 +42,7 @@ return new class extends Migration
             $table->dropForeign('vacantes_user_id_foreign');
 
 
-            $table->dropColumn(['titulo','salario_id','categoria_id','empresa','ultimo_dia','descripcion','imagen','publicado','user_id']);
+            $table->dropColumn(['titulo','salario_id','categoria_id','empresa','ultimo_dia','descripcion','edad_minima','edad_maxima','imagen','publicado','user_id']);
 
         });
     }

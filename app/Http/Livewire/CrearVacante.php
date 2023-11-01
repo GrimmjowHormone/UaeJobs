@@ -6,6 +6,7 @@ namespace App\Http\Livewire;
 use App\Models\Categoria;
 use App\Models\Country;
 use App\Models\Salario;
+use App\Models\State;
 use App\Models\Vacante;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -24,6 +25,9 @@ class CrearVacante extends Component
     public $edad_minima;
     public $edad_maxima;
     public $country;
+    public $state;
+    public $municipio;
+
     use WithFileUploads;
     protected $rules = [
         'titulo' => 'required|string',
@@ -35,12 +39,28 @@ class CrearVacante extends Component
         'imagen' => 'required|image|max:1024',
         'edad_minima' => 'required|integer|min:18',
         'edad_maxima' => 'required|integer|min:18|max:70',
-        'country' => 'required'
-
+        'country' => 'required',
+        'municipio'=>'required',
+        'state'=>'required'
 
     ];
 
     //
+    // public function cargarEstados()
+    // {
+
+    //     $selectedCountry = Country::find($this->country);
+
+    //     if ($selectedCountry && ($selectedCountry->country === 'Mexico' || $selectedCountry->country_id === 1)) {
+    //         $this->state = State::where('country_id', $this->country)->get();
+
+    //     } else {
+    //         $this->state = [];
+    //     }
+
+
+    // }
+
 
     public function crearVacante()
     {
@@ -64,8 +84,11 @@ class CrearVacante extends Component
             'imagen' => $datos['imagen'],
             'user_id' => auth()->user()->id,
             'country_id' => $datos['country'],
+            'state_id' =>$datos['state'],
             'edad_minima' => $datos['edad_minima'],
-            'edad_maxima' => $datos['edad_maxima']
+            'edad_maxima' => $datos['edad_maxima'],
+
+            'municipio' =>$datos['municipio']
 
         ]);
         //Crear un mensaje
@@ -82,10 +105,15 @@ class CrearVacante extends Component
         $salarios = Salario::all();
         $categorias = Categoria::all();
         $countries = Country::all();
+        $states=State::all();
+
         return view('livewire.crear-vacante', [
             'salarios' => $salarios,
             'categorias' => $categorias,
-            'countries'=>$countries
+            'countries'=>$countries,
+            'states'=>$states
+
         ]);
+
     }
 }

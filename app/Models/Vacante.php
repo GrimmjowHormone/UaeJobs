@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 class Vacante extends Model
 {
     use HasFactory;
@@ -12,34 +13,45 @@ class Vacante extends Model
     protected $casts = ['ultimo_dia' => 'datetime'];
 
 
-    protected $fillable=[
+    protected $fillable = [
         'titulo',
         'salario_id',
         'categoria_id',
         'empresa',
         'ultimo_dia',
         'descripcion',
+        'edad_minima',
+        'edad_maxima',
+        'municipio',
         'imagen',
         'user_id',
-        'country_id'
+        'country_id',
+        'state_id'
     ];
-    public function categoria(){
+    public function categoria()
+    {
         return $this->belongsTo(Categoria::class);
     }
-    public function salario(){
+    public function salario()
+    {
         return $this->belongsTo(Salario::class);
     }
 
-    public function candidatos(){
-        return $this->hasMany(Candidato::class)->orderBy('created_at','DESC');
+    public function candidatos()
+    {
+        return $this->hasMany(Candidato::class)->orderBy('created_at', 'DESC');
     }
 
-    public function reclutador(){
+    public function reclutador()
+    {
         return $this->belongsTo(User::class, 'user_id');
     }
     public function country()
-{
-    return $this->belongsTo(Country::class);
-}
-
+    {
+        return $this->belongsTo(Country::class);
+    }
+    public function state()
+    {
+        return $this->belongsTo(State::class);
+    }
 }

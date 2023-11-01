@@ -73,7 +73,7 @@
         </div>
     </div>
     {{-- Pais --}}
-    <div>
+    {{-- <div>
         <x-input-label for="country" :value="__('Pais')" />
         <select wire:model="country" id="country"
             class=" w-full order-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
@@ -85,6 +85,73 @@
         </select>
         <x-input-error :messages="$errors->get('country')" class="mt-2" />
     </div>
+
+
+
+
+        @if ($country->id == 3)
+        <p>Hola Mundo</p>
+        @endif
+
+        @php
+        dd($country->id);
+    @endphp --}}
+
+    {{-- Pais --}}
+    <div>
+        <x-input-label for="country" :value="__('Pais')" />
+        <select wire:model="country" id="country"
+            class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+
+            <option value="">--Seleccione--</option>
+            @foreach ($countries as $countryOption)
+                <option value="{{ $countryOption->id }}">{{ $countryOption->country }}</option>
+            @endforeach
+        </select>
+        <x-input-error :messages="$errors->get('country')" class="mt-2" />
+    </div>
+
+    @if ($country == 1)
+        {{-- Estado --}}
+        <div>
+            <x-input-label for="state" :value="__('Estado')" />
+            <select wire:model="state" id="state"
+                class=" w-full order-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+
+                <option value="">--Seleccione--</option>
+                @foreach ($states as $state)
+                    <option value="{{ $state->id }}">{{ $state->state }}</option>
+                @endforeach
+            </select>
+            <x-input-error :messages="$errors->get('state')" class="mt-2" />
+        </div>
+        <div>
+            <x-input-label for="municipio" :value="__('Municipio')" />
+            <x-text-input id="municipio" class="block mt-1 w-full" type="text" wire:model="municipio" :value="old('municipio')"
+                placeholder="Ingrese Municipio del lugar de trabajo" />
+            <x-input-error :messages="$errors->get('titulo')" class="mt-2" />
+        </div>
+    @else
+        <div>
+            <x-input-label for="municipio" :value="__('Estado o municipio')" />
+            <x-text-input id="municipio" class="block mt-1 w-full" type="text" wire:model="municipio" :value="old('state')"
+                placeholder="Ingrese estado/Municipio  del lugar de trabajo" />
+            <x-input-error :messages="$errors->get('municipio')" class="mt-2" />
+        </div>
+    @endif
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     {{-- Imagen --}}
     <div>
