@@ -24,11 +24,16 @@
                     class="normal-case font-normal">{{ $vacante->salario->salario }}</span></p>
 
             <p class="font-bold text-sm uppercase text-gray-800 my-3">Edad: <span
-                    class="normal-case font-normal">{{ $vacante->edad_minima }} a {{ $vacante->edad_maxima }} </span></p>
+                    class="normal-case font-normal">{{ $vacante->edad_minima }} a {{ $vacante->edad_maxima }}
+                    años</span></p>
 
-                    {{-- Pais --}}
-                    <p class="font-bold text-sm uppercase text-gray-800 my-3">Pais: <span
-                        class="normal-case font-normal">{{ $vacante->country->country }}</span></p>
+            {{-- Pais --}}
+            <p class="font-bold text-sm uppercase text-gray-800 my-3">Lugar De Trabajo: <span
+                    class="normal-case font-normal">{{ $vacante->country->country }}, @if ($vacante->state)
+                        {{ $vacante->state->state }},
+                    @endif {{ $vacante->municipio }}</span></p>
+            <p class="font-bold text-sm uppercase text-gray-800 my-3">Licencia De Conducir: <span
+                    class="normal-case font-normal">{{ $vacante->licencia }}</span></p>
         </div>
 
     </div>
@@ -46,10 +51,10 @@
     @auth
 
 
-    @cannot('create', App\Models\Vacante::class)
+        @cannot('create', App\Models\Vacante::class)
 
-        <livewire:postular-vacante :vacante="$vacante" />
-    @endcan
+            <livewire:postular-vacante :vacante="$vacante" />
+        @endcan
     @endauth
     @guest
 

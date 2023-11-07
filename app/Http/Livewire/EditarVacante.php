@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Categoria;
 use App\Models\Country;
 use App\Models\Salario;
+use App\Models\State;
 use App\Models\Vacante;
 use Illuminate\Support\Carbon;
 use Livewire\Component;
@@ -25,6 +26,9 @@ class EditarVacante extends Component
     public $edad_minima; // Agrega esta línea
     public $edad_maxima;
     public $country;
+    public $state;
+    public $municipio;
+    public $licencia;
     use WithFileUploads;
     protected $rules = [
         'titulo' => 'required|string',
@@ -36,8 +40,10 @@ class EditarVacante extends Component
         'edad_minima' => 'integer|min:18',
         'edad_maxima' => 'integer|min:18|max:70',
         'new_imagen' => 'nullable|image|max:1024',
-        'country' => 'required'
-
+        'country' => 'required',
+        'municipio'=>'required',
+        'licencia'=>'required',
+        'state' => 'required_if:country,1',
 
 
     ];
@@ -53,6 +59,8 @@ class EditarVacante extends Component
         $this->edad_minima=$vacante->edad_minima;
         $this->edad_maxima=$vacante->edad_maxima;
         $this->country=$vacante->country_id;
+        $this->state=$vacante->state_id;
+        $this->municipio=$vacante->municipio;
         $this->imagen = $vacante->imagen;
     }
     public function editarVacante()
@@ -82,6 +90,9 @@ class EditarVacante extends Component
         $vacante->edad_minima=$datos['edad_minima'];
         $vacante->imagen=$datos['imagen'] ?? $vacante->imagen;
         $vacante->country_id=$datos['country'];
+        $vacante->state_id=$datos['state'];
+        $vacante->municipio=$datos['municipio'];
+
 
 
         //Guardar la vacante
@@ -95,10 +106,12 @@ class EditarVacante extends Component
         $salarios = Salario::all();
         $categorias = Categoria::all();
         $countries = Country::all();
+        $states=State::all();
         return view('livewire.editar-vacante', [
             'salarios' => $salarios,
             'categorias' => $categorias,
-            'countries'=>$countries
+            'countries'=>$countries,
+            'states'=>$states
         ]);
     }
 }

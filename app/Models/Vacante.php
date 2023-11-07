@@ -23,6 +23,7 @@ class Vacante extends Model
         'edad_minima',
         'edad_maxima',
         'municipio',
+        'licencia',
         'imagen',
         'user_id',
         'country_id',

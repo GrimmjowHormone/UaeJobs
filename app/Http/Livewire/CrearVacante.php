@@ -27,6 +27,7 @@ class CrearVacante extends Component
     public $country;
     public $state;
     public $municipio;
+    public $licencia;
 
     use WithFileUploads;
     protected $rules = [
@@ -41,7 +42,8 @@ class CrearVacante extends Component
         'edad_maxima' => 'required|integer|min:18|max:70',
         'country' => 'required',
         'municipio'=>'required',
-        'state'=>'required'
+        'licencia'=>'required',
+        'state' => 'required_if:country,1',
 
     ];
 
@@ -88,7 +90,8 @@ class CrearVacante extends Component
             'edad_minima' => $datos['edad_minima'],
             'edad_maxima' => $datos['edad_maxima'],
 
-            'municipio' =>$datos['municipio']
+            'municipio' =>$datos['municipio'],
+            'licencia' =>$datos['licencia']
 
         ]);
         //Crear un mensaje
