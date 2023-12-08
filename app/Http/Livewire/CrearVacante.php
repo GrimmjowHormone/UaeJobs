@@ -39,7 +39,7 @@ class CrearVacante extends Component
         'descripcion' => 'required',
         'imagen' => 'required|image|max:1024',
         'edad_minima' => 'required|integer|min:18',
-        'edad_maxima' => 'required|integer|min:18|max:70',
+        'edad_maxima' => 'required|integer|min:19|gt:edad_minima,70',
         'country' => 'required',
         'municipio'=>'required',
         'licencia'=>'required',

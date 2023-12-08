@@ -105,7 +105,7 @@
             <x-input-label for="municipio" :value="__('Municipio')" />
             <x-text-input id="municipio" class="block mt-1 w-full" type="text" wire:model="municipio"
                 :value="old('municipio')" placeholder="Ingrese Municipio del lugar de trabajo" />
-            <x-input-error :messages="$errors->get('titulo')" class="mt-2" />
+            <x-input-error :messages="$errors->get('municipio')" class="mt-2" />
         </div>
     @else
         <div>
@@ -119,7 +119,7 @@
     {{-- Licencia --}}
     <div>
         <x-input-label for="licencia" :value="__('Tipo de licencia')" />
-        <select wire:model="licencia" id="licencia"
+        <select wire:model="licencia" id="licencia" :value="old('licencia')"
             class=" w-full order-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
 
             <option value="">--Seleccione--</option>

@@ -37,8 +37,8 @@ class EditarVacante extends Component
         'empresa' => 'required',
         'ultimo_dia' => 'required',
         'descripcion' => 'required',
-        'edad_minima' => 'integer|min:18',
-        'edad_maxima' => 'integer|min:18|max:70',
+        'edad_minima' => 'required|integer|min:18',
+        'edad_maxima' => 'required|integer|min:19|gt:edad_minima,70',
         'new_imagen' => 'nullable|image|max:1024',
         'country' => 'required',
         'municipio'=>'required',
@@ -62,6 +62,7 @@ class EditarVacante extends Component
         $this->state=$vacante->state_id;
         $this->municipio=$vacante->municipio;
         $this->imagen = $vacante->imagen;
+        $this->licencia=$vacante->licencia;
     }
     public function editarVacante()
     {
